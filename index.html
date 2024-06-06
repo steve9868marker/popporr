@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>orange</title>
+<link rel="icon" href="favicon.png" type="image/x-icon"> <!-- Add this line for the favicon -->
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden;
+    }
+    
+    #fullscreen-button {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('livecam.png') no-repeat center center;
+        background-size: cover;
+        border: none;
+        outline: none;
+        cursor: pointer;
+    }
+    
+    #fullscreen-image {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+</style>
+</head>
+<body>
+    <button id="fullscreen-button" onclick="startAnimation()">click-here</button>
+    <img id="fullscreen-image" src="nnpop.jpg" alt="Fullscreen Image">
+    <audio id="audio" loop>
+        <source src="virussoundeffect.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+<script>
+    function startAnimation() {
+        document.getElementById('fullscreen-button').style.display = 'none';
+        document.getElementById('fullscreen-image').style.display = 'block';
+        document.documentElement.requestFullscreen();
+        document.getElementById('audio').play();
+
+        // Re-enter fullscreen whenever it exits
+        document.addEventListener('fullscreenchange', handleFullscreenChange);
+    }
+
+    function handleFullscreenChange() {
+        if (!document.fullscreenElement) {
+            startAnimation();
+        }
+    }
+
+    // Ask confirmation when leaving the page
+    window.addEventListener('beforeunload', function (e) {
+        e.preventDefault();
+        e.returnValue = '';
+    });
+</script>
+</body>
+</html>
